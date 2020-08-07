@@ -1,0 +1,65 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  xray: one
+  user: one
+  directory: MyString
+  product: MyString
+  application: MyString
+  block_at: 2020-08-07 10:44:11
+  number: 1
+  shop_order: 1
+  load: 1
+  is_early: false
+  is_rework: false
+  is_strip: false
+  customer_code: MyString
+  process_code: MyString
+  part_number: MyString
+  part_sub: MyString
+  part_control: 1
+  part_name_1: MyString
+  part_name_2: MyString
+  part_name_3: MyString
+  count_readings: 1
+  has_alloy: false
+  mean_thickness: 1.5
+  min_thickness: 1.5
+  max_thickness: 1.5
+  std_dev_thickness: 1.5
+  mean_alloy: 1.5
+  min_alloy: 1.5
+  max_alloy: 1.5
+  std_dev_alloy: 1.5
+
+two:
+  xray: two
+  user: two
+  directory: MyString
+  product: MyString
+  application: MyString
+  block_at: 2020-08-07 10:44:11
+  number: 1
+  shop_order: 1
+  load: 1
+  is_early: false
+  is_rework: false
+  is_strip: false
+  customer_code: MyString
+  process_code: MyString
+  part_number: MyString
+  part_sub: MyString
+  part_control: 1
+  part_name_1: MyString
+  part_name_2: MyString
+  part_name_3: MyString
+  count_readings: 1
+  has_alloy: false
+  mean_thickness: 1.5
+  min_thickness: 1.5
+  max_thickness: 1.5
+  std_dev_thickness: 1.5
+  mean_alloy: 1.5
+  min_alloy: 1.5
+  max_alloy: 1.5
+  std_dev_alloy: 1.5

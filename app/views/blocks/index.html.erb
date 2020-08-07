@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Blocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Xray</th>
+      <th>User</th>
+      <th>Directory</th>
+      <th>Product</th>
+      <th>Application</th>
+      <th>Block at</th>
+      <th>Number</th>
+      <th>Shop order</th>
+      <th>Load</th>
+      <th>Is early</th>
+      <th>Is rework</th>
+      <th>Is strip</th>
+      <th>Customer code</th>
+      <th>Process code</th>
+      <th>Part number</th>
+      <th>Part sub</th>
+      <th>Part control</th>
+      <th>Part name 1</th>
+      <th>Part name 2</th>
+      <th>Part name 3</th>
+      <th>Count readings</th>
+      <th>Has alloy</th>
+      <th>Mean thickness</th>
+      <th>Min thickness</th>
+      <th>Max thickness</th>
+      <th>Std dev thickness</th>
+      <th>Mean alloy</th>
+      <th>Min alloy</th>
+      <th>Max alloy</th>
+      <th>Std dev alloy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blocks.each do |block| %>
+      <tr>
+        <td><%= block.xray_id %></td>
+        <td><%= block.user_id %></td>
+        <td><%= block.directory %></td>
+        <td><%= block.product %></td>
+        <td><%= block.application %></td>
+        <td><%= block.block_at %></td>
+        <td><%= block.number %></td>
+        <td><%= block.shop_order %></td>
+        <td><%= block.load %></td>
+        <td><%= block.is_early %></td>
+        <td><%= block.is_rework %></td>
+        <td><%= block.is_strip %></td>
+        <td><%= block.customer_code %></td>
+        <td><%= block.process_code %></td>
+        <td><%= block.part_number %></td>
+        <td><%= block.part_sub %></td>
+        <td><%= block.part_control %></td>
+        <td><%= block.part_name_1 %></td>
+        <td><%= block.part_name_2 %></td>
+        <td><%= block.part_name_3 %></td>
+        <td><%= block.count_readings %></td>
+        <td><%= block.has_alloy %></td>
+        <td><%= block.mean_thickness %></td>
+        <td><%= block.min_thickness %></td>
+        <td><%= block.max_thickness %></td>
+        <td><%= block.std_dev_thickness %></td>
+        <td><%= block.mean_alloy %></td>
+        <td><%= block.min_alloy %></td>
+        <td><%= block.max_alloy %></td>
+        <td><%= block.std_dev_alloy %></td>
+        <td><%= link_to 'Show', block %></td>
+        <td><%= link_to 'Edit', edit_block_path(block) %></td>
+        <td><%= link_to 'Destroy', block, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Block', new_block_path %>

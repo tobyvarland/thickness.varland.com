@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Block:</strong>
+  <%= @reading.block_id %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @reading.number %>
+</p>
+
+<p>
+  <strong>Reading at:</strong>
+  <%= @reading.reading_at %>
+</p>
+
+<p>
+  <strong>Thickness:</strong>
+  <%= @reading.thickness %>
+</p>
+
+<p>
+  <strong>Alloy:</strong>
+  <%= @reading.alloy %>
+</p>
+
+<p>
+  <strong>X coordinate:</strong>
+  <%= @reading.x_coordinate %>
+</p>
+
+<p>
+  <strong>Y coordinate:</strong>
+  <%= @reading.y_coordinate %>
+</p>
+
+<p>
+  <strong>Z coordinate:</strong>
+  <%= @reading.z_coordinate %>
+</p>
+
+<%= link_to 'Edit', edit_reading_path(@reading) %> |
+<%= link_to 'Back', readings_path %>

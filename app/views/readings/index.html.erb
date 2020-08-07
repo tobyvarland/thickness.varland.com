@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Readings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Block</th>
+      <th>Number</th>
+      <th>Reading at</th>
+      <th>Thickness</th>
+      <th>Alloy</th>
+      <th>X coordinate</th>
+      <th>Y coordinate</th>
+      <th>Z coordinate</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @readings.each do |reading| %>
+      <tr>
+        <td><%= reading.block_id %></td>
+        <td><%= reading.number %></td>
+        <td><%= reading.reading_at %></td>
+        <td><%= reading.thickness %></td>
+        <td><%= reading.alloy %></td>
+        <td><%= reading.x_coordinate %></td>
+        <td><%= reading.y_coordinate %></td>
+        <td><%= reading.z_coordinate %></td>
+        <td><%= link_to 'Show', reading %></td>
+        <td><%= link_to 'Edit', edit_reading_path(reading) %></td>
+        <td><%= link_to 'Destroy', reading, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reading', new_reading_path %>

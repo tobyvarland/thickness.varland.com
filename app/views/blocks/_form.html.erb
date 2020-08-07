@@ -1,0 +1,167 @@
+<%= form_with(model: block, local: true) do |form| %>
+  <% if block.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(block.errors.count, "error") %> prohibited this block from being saved:</h2>
+
+      <ul>
+        <% block.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :xray_id %>
+    <%= form.text_field :xray_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :directory %>
+    <%= form.text_field :directory %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product %>
+    <%= form.text_field :product %>
+  </div>
+
+  <div class="field">
+    <%= form.label :application %>
+    <%= form.text_field :application %>
+  </div>
+
+  <div class="field">
+    <%= form.label :block_at %>
+    <%= form.datetime_select :block_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shop_order %>
+    <%= form.number_field :shop_order %>
+  </div>
+
+  <div class="field">
+    <%= form.label :load %>
+    <%= form.number_field :load %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_early %>
+    <%= form.check_box :is_early %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_rework %>
+    <%= form.check_box :is_rework %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_strip %>
+    <%= form.check_box :is_strip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :customer_code %>
+    <%= form.text_field :customer_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :process_code %>
+    <%= form.text_field :process_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_number %>
+    <%= form.text_field :part_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_sub %>
+    <%= form.text_field :part_sub %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_control %>
+    <%= form.number_field :part_control %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_name_1 %>
+    <%= form.text_field :part_name_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_name_2 %>
+    <%= form.text_field :part_name_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_name_3 %>
+    <%= form.text_field :part_name_3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :count_readings %>
+    <%= form.number_field :count_readings %>
+  </div>
+
+  <div class="field">
+    <%= form.label :has_alloy %>
+    <%= form.check_box :has_alloy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mean_thickness %>
+    <%= form.text_field :mean_thickness %>
+  </div>
+
+  <div class="field">
+    <%= form.label :min_thickness %>
+    <%= form.text_field :min_thickness %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_thickness %>
+    <%= form.text_field :max_thickness %>
+  </div>
+
+  <div class="field">
+    <%= form.label :std_dev_thickness %>
+    <%= form.text_field :std_dev_thickness %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mean_alloy %>
+    <%= form.text_field :mean_alloy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :min_alloy %>
+    <%= form.text_field :min_alloy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_alloy %>
+    <%= form.text_field :max_alloy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :std_dev_alloy %>
+    <%= form.text_field :std_dev_alloy %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

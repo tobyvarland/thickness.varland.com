@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Xrays</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @xrays.each do |xray| %>
+      <tr>
+        <td><%= xray.description %></td>
+        <td><%= link_to 'Show', xray %></td>
+        <td><%= link_to 'Edit', edit_xray_path(xray) %></td>
+        <td><%= link_to 'Destroy', xray, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Xray', new_xray_path %>

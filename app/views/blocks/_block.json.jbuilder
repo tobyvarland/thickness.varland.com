@@ -1,0 +1,2 @@
+json.extract! block, :id, :xray_id, :user_id, :directory, :product, :application, :block_at, :number, :shop_order, :load, :is_early, :is_rework, :is_strip, :customer_code, :process_code, :part_number, :part_sub, :part_control, :part_name_1, :part_name_2, :part_name_3, :count_readings, :has_alloy, :mean_thickness, :min_thickness, :max_thickness, :std_dev_thickness, :mean_alloy, :min_alloy, :max_alloy, :std_dev_alloy, :created_at, :updated_at
+json.url block_url(block, format: :json)

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  block: one
+  number: 1
+  reading_at: 2020-08-07 10:45:15
+  thickness: 1.5
+  alloy: 1.5
+  x_coordinate: 1.5
+  y_coordinate: 1.5
+  z_coordinate: 1.5
+
+two:
+  block: two
+  number: 1
+  reading_at: 2020-08-07 10:45:15
+  thickness: 1.5
+  alloy: 1.5
+  x_coordinate: 1.5
+  y_coordinate: 1.5
+  z_coordinate: 1.5
