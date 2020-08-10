@@ -1,0 +1,40 @@
+# Create workbook.
+wb = xlsx_package.workbook
+
+# Add sheet for filter summary.
+filters = []
+filters << {  field:  "Application",
+              value:  params[:with_application] } unless params[:with_application].blank?
+wb.add_worksheet(name: "Summary") do |sheet|
+  sheet.add_row ["Export Summary"]
+  sheet.add_row [""]
+  sheet.add_row ["# Blocks:", @unpaged_blocks.size]
+  sheet.add_row ["# Readings:", @unpaged_blocks.collect(&:count_readings).sum]
+  sheet.add_row [""]
+  sheet.add_row ["Filters Applied to Results"]
+  sheet.add_row [""]
+  sheet.add_row ["Field", "Value"]
+  unless filters.size == 0
+    filters.each do |filter|
+      sheet.add_row [filter[:field], filter[:value]]
+    end
+  end
+end
+
+# Add sheet for block summaries.
+wb.add_worksheet(name: "Blocks") do |sheet|
+  sheet.add_row Block.header_row
+  @unpaged_blocks.each do |block|
+    sheet.add_row block.spreadsheet_row
+  end
+end
+
+# Add sheet for individual readings.
+wb.add_worksheet(name: "Readings") do |sheet|
+  sheet.add_row Reading.header_row
+  @unpaged_blocks.each do |block|
+    block.readings.each do |reading|
+      sheet.add_row reading.spreadsheet_row
+    end
+  end
+end

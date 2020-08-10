@@ -1,0 +1,201 @@
+// Variables.
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+$widths: 1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100;
+$color-varland-red: #df151a;
+$color-uncolor: #aa9c84;
+$monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Functions.
+@function breakpoint($breakpoint) {
+  @return map-get($grid-breakpoints, $breakpoint);
+}
+
+// Width utilities.
+@each $key, $value in $grid-breakpoints {
+  @if $key == xs {
+    @each $width in $widths {
+      .w-#{$width} { width: #{$width * 1%} !important; }
+    }
+  } @else {
+    @media (min-width: breakpoint($key)) {
+      @each $width in $widths {
+        .w-#{$key}-#{$width} { width: #{$width * 1%} !important; }
+      }
+    }
+  }
+}
+
+// Branding.
+.text-vp-red { color: $color-varland-red; }
+.text-uncolor { color: $color-uncolor; }
+.bg-vp-red { background-color: $color-varland-red; }
+code { color: #e83e8c !important; }
+
+// Headings.
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 3px #000000;
+}
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: 1rem; }
+
+// Buttons.
+.btn {
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+}
+
+// Tables.
+.w-min { width: 1%; }
+.no-wrap { white-space: nowrap !important; }
+
+// Header.
+.header {
+  border-bottom: 1px solid #454d55 !important;
+  height: 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+}
+.logo {
+  img {
+    display: block;
+    height: 3rem;
+  }
+}
+.pagination-input {
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  input {
+    border: none !important;
+    outline: none !important;
+    width: 3rem;
+  }
+}
+
+// Filters.
+#thickness-filters {
+  border-bottom: 1px solid #454d55 !important;
+  .col {
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.filter-title {
+  font-size: 80%;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.form-group {
+  label {
+    font-size: 75%;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
+#thickness-filter-descriptions {
+  border-bottom: 1px solid #454d55 !important;
+  &:empty {
+    display: none;
+  }
+}
+
+// Data table.
+th, td {
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+.thead-dark {
+  th {
+    font-size: 80%;
+    font-weight: 700;
+    text-shadow: 0px 0px 3px #000000;
+    text-transform: uppercase;
+  }
+}
+.value {
+  color: #000 !important;
+  font-family: $monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.table-value {
+  font-family: $monospace;
+  font-weight: 700;  
+}
+.part-spec,
+.dir-prod-app {
+  font-size: 80%;
+  font-weight: 700;
+  text-transform: uppercase;
+  span {
+    color: $color-uncolor;
+    font-size: 90%;
+    font-weight: 400;
+  }
+}
+.part-name { font-size: 80%; }
+.load-badge {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.field-label {
+  color: $color-uncolor;
+  font-size: 80%;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.stats {
+  div + div {
+    margin-top: 0.25rem;
+  }
+}
+.timestamp, .operator {
+  font-size: 80%;
+  strong {
+    font-family: $monospace;
+    font-size: 90%;
+  }
+}
+.readings-table {
+  font-size: 80%;
+  margin-bottom: 0;
+}
+hr {
+  margin: 0.25rem 0 !important;
+}
+.thickness-data-table {
+  border-top: none !important;
+  .sticky {
+    border-top: none !important;
+    th {
+      border-top: none !important;
+      position: sticky;
+      top: calc(4rem - 1px);
+    }
+  }
+}
+
+@media print {
+  h1 { color: #000 !important; }
+  body { padding-top: 0 !important; }
+  .header { position: relative !important; }
+  .field-label { color: inherit !important; }
+}

@@ -1,10 +1,49 @@
 class BlocksController < ApplicationController
+
+  # Use has_scope gem for filtering.
+  has_scope :sorted_by
+  has_scope :on_or_after
+  has_scope :on_or_before
+  has_scope :with_shop_order
+  has_scope :with_load
+  has_scope :with_rework
+  has_scope :with_early
+  has_scope :with_strip
+  has_scope :with_customer
+  has_scope :with_process
+  has_scope :with_part
+  has_scope :with_sub
+  has_scope :with_part_name
+  has_scope :with_xray
+  has_scope :with_application
+  has_scope :with_directory
+  has_scope :with_product
+  has_scope :with_operator
+  has_scope :with_mean_thickness
+  has_scope :with_min_thickness
+  has_scope :with_max_thickness
+  has_scope :with_std_dev_thickness
+  has_scope :with_mean_alloy
+  has_scope :with_min_alloy
+  has_scope :with_max_alloy
+  has_scope :with_std_dev_alloy
+
   before_action :set_block, only: [:show, :edit, :update, :destroy]
 
   # GET /blocks
   # GET /blocks.json
   def index
-    @blocks = Block.all
+    params[:per_page] = 50 if params[:per_page].blank?
+    params[:sorted_by] = 'newest' if params[:sorted_by].blank?
+    @unpaged_blocks = apply_scopes(Block.includes(:user, :xray, :readings))
+    @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        timestamp = DateTime.current.strftime("%Y%m%d_%H%M%S")
+        response.headers['Content-Disposition'] = "attachment; filename=\"ThicknessExport_#{timestamp}.xlsx\""
+      }
+    end
   end
 
   # GET /blocks/1

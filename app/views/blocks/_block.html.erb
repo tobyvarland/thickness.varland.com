@@ -1,0 +1,68 @@
+<tr data-block="<%= block.id %>">
+  <td>
+    <span class="field-label">SO</span>
+    <span class="value"><%= link_to block.shop_order, request.params.merge({with_shop_order: block.shop_order}) %></span>
+    <% unless block.shop_order == 111 %>
+      <hr>
+      <%= part_spec(block) %>
+      <hr>
+      <span class="part-name"><%= block.part_name.join("<br>").html_safe %></span>
+    <% end %>
+  </td>
+  <td class="text-center"><%= load_with_badges(block) %></td>
+  <td>
+    <span class="field-label">X-Ray</span>
+    <span class="value"><%= link_to block.xray.id, request.params.merge({with_xray: block.xray_id}) %></span>
+    <hr>
+    <span class="dir-prod-app">
+      <span>Application</span> <%= link_to block.application, request.params.merge({with_application: block.application}) %><br>
+      <span>Directory</span> <%= link_to block.directory, request.params.merge({with_directory: block.directory}) %><br>
+      <span>Product</span> <%= link_to block.product, request.params.merge({with_product: block.product}) %><br>
+      <span>Block #</span> <%= block.number %>
+    </span>
+    <hr>
+    <%= link_to block.user.number_and_name, request.params.merge({with_operator: block.user_id}) %>
+    <hr>
+    <span class="timestamp"><%= block.block_at.strftime("%m/%d/%y %l:%M%P") %></span>
+  </td>
+  <td class="text-right stats">
+    <div><span class="field-label">Mean</span> <span class="value"><%= ("%.3f" % block.mean_thickness).rjust(6, " ") %></span></div>
+    <div><span class="field-label">Minimum</span> <span class="value"><%= ("%.3f" % block.min_thickness).rjust(6, " ") %></span></div>
+    <div><span class="field-label">Maximum</span> <span class="value"><%= ("%.3f" % block.max_thickness).rjust(6, " ") %></span></div>
+    <div><span class="field-label">Std. Dev.</span> <span class="value"><%= ("%.3f" % block.std_dev_thickness).rjust(6, " ") %></span></div>
+  </td>
+  <td class="text-right stats">
+    <% if block.has_alloy %>
+      <div><span class="field-label">Mean</span> <span class="value"><%= ("%.3f" % block.mean_alloy).rjust(8, " ") %></span></div>
+      <div><span class="field-label">Minimum</span> <span class="value"><%= ("%.3f" % block.min_alloy).rjust(8, " ") %></span></div>
+      <div><span class="field-label">Maximum</span> <span class="value"><%= ("%.3f" % block.max_alloy).rjust(8, " ") %></span></div>
+      <div><span class="field-label">Std. Dev.</span> <span class="value"><%= ("%.3f" % block.std_dev_alloy).rjust(8, " ") %></span></div>
+    <% end %>
+  </td>
+  <td>
+    <table class="table table-bordered table-sm readings-table">
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th>Date/Time</th>
+          <th class="text-center">Thickness</th>
+          <th class="text-center">Alloy %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% block.readings.each do |reading| %>
+          <tr>
+            <td class="text-center"><%= reading.number %></td>
+            <td><%= reading.reading_at.strftime("%m/%d/%y %l:%M:%S%P") %></td>
+            <td class="text-right table-value"><%= "%.3f" % reading.thickness %></td>
+            <td class="text-right table-value">
+              <% unless reading.alloy.blank? %>
+                <%= "%.3f" % reading.alloy %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </td>
+</tr>

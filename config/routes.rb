@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
+
+  root  'blocks#index'
+
+  get   "login",                to: "sessions#new"
+  post  "login",                to: "sessions#create"
+  get   "logout",               to: "sessions#destroy"
+  post  "logout",               to: "sessions#destroy"
+
   resources :readings
   resources :blocks
   resources :xrays
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
 end

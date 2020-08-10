@@ -1,0 +1,85 @@
+<div class="bg-dark text-light p-3 collapse" id="thickness-filters">
+  <%= form_with url: blocks_path,
+              method: 'get' do |f| %>
+    <p class="text-warning small font-weight-bold text-uppercase">When filtering by thickness or alloy percentage, include an operator and value in the filter box: <code>&gt; 0.325</code>.</p>
+    <div class="row">
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">Shop Order/Load</h5>
+        <%== filter_number_field(f, :with_shop_order, "Shop Order") %>
+        <%== filter_number_field(f, :with_load, "Load") %>
+        <%== filter_dropdown(f, :with_rework, "Rework", [["Only Rework", "1"], ["Exclude Rework", "2"]], no_sort: true) %>
+        <%== filter_dropdown(f, :with_early, "Early Checks", [["Only Early Checks", "1"], ["Exclude Early Checks", "2"]], no_sort: true) %>
+        <%== filter_dropdown(f, :with_strip, "Strip Checks", [["Only Strip Checks", "1"], ["Exclude Strip Checks", "2"]], no_sort: true) %>
+      </div>
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">Customer/Part</h5>
+        <%== filter_dropdown(f, :with_customer, "Customer", @unpaged_blocks.collect(&:customer_code)) %>
+        <%== filter_dropdown(f, :with_process, "Process", @unpaged_blocks.collect(&:process_code)) %>
+        <%== filter_dropdown(f, :with_part, "Part ID", @unpaged_blocks.collect(&:part_number)) %>
+        <%== filter_dropdown(f, :with_sub, "Sub ID", @unpaged_blocks.collect(&:part_sub)) %>
+        <%== filter_text_field(f, :with_part_name, "Part Name") %>
+      </div>
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">X-Ray</h5>
+        <%== filter_dropdown(f, :with_xray, "X-Ray", @unpaged_blocks.collect(&:xray_id)) %>
+        <%== filter_dropdown(f, :with_application, "Application", @unpaged_blocks.collect(&:application)) %>
+        <%== filter_dropdown(f, :with_directory, "Directory", @unpaged_blocks.collect(&:directory)) %>
+        <%== filter_dropdown(f, :with_product, "Product", @unpaged_blocks.collect(&:product)) %>
+        <%== filter_dropdown(f, :with_operator, "Operator", User.for_dropdown(@unpaged_blocks.pluck(:user_id)), no_sort: true) %>
+      </div>
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">Thickness</h5>
+        <%== filter_text_field(f, :with_mean_thickness, "Mean") %>
+        <%== filter_text_field(f, :with_min_thickness, "Minimum") %>
+        <%== filter_text_field(f, :with_max_thickness, "Maximum") %>
+        <%== filter_text_field(f, :with_std_dev_thickness, "Standard Deviation") %>
+      </div>
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">Alloy %</h5>
+        <%== filter_text_field(f, :with_mean_alloy, "Mean") %>
+        <%== filter_text_field(f, :with_min_alloy, "Minimum") %>
+        <%== filter_text_field(f, :with_max_alloy, "Maximum") %>
+        <%== filter_text_field(f, :with_std_dev_alloy, "Standard Deviation") %>
+      </div>
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">Date</h5>
+        <%== filter_date_field(f, :on_or_after, "On Or After") %>
+        <%== filter_date_field(f, :on_or_before, "On Or Before") %>
+      </div>
+      <div class="col">
+        <h5 class="filter-title text-warning mb-2">Options</h5>
+        <%== filter_dropdown(f, :sorted_by, "Sort By", [["Oldest First", "oldest"], ["Newest First", "newest"]], no_sort: true, include_blank: false) %>
+        <%== filter_number_field(f, :per_page, "Per Page") %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="bg-dark text-light pb-2 pr-2" id="thickness-filter-descriptions">
+  <%= clear_filter_link("with_shop_order", "Shop Order") %>
+  <%= clear_filter_link("with_load", "Load") %>
+  <%= clear_filter_link("with_rework", "Rework") %>
+  <%= clear_filter_link("with_early", "Early Checks") %>
+  <%= clear_filter_link("with_strip", "Strip Checks") %>
+  <%= clear_filter_link("with_customer", "Customer") %>
+  <%= clear_filter_link("with_process", "Process") %>
+  <%= clear_filter_link("with_part", "Part ID") %>
+  <%= clear_filter_link("with_sub", "Sub ID") %>
+  <%= clear_filter_link("with_part_name", "Part Name") %>
+  <%= clear_filter_link("with_xray", "X-Ray") %>
+  <%= clear_filter_link("with_application", "Application") %>
+  <%= clear_filter_link("with_directory", "Directory") %>
+  <%= clear_filter_link("with_product", "Product") %>
+  <%= clear_filter_link("with_operator", "Operator") %>
+  <%= clear_filter_link("with_mean_thickness", "Mean Thickness") %>
+  <%= clear_filter_link("with_min_thickness", "Minimum Thickness") %>
+  <%= clear_filter_link("with_max_thickness", "Maximum Thickness") %>
+  <%= clear_filter_link("with_std_dev_thickness", "Standard Deviation Thickness") %>
+  <%= clear_filter_link("with_mean_alloy", "Mean Alloy") %>
+  <%= clear_filter_link("with_min_alloy", "Minimum Alloy") %>
+  <%= clear_filter_link("with_max_alloy", "Maximum Alloy") %>
+  <%= clear_filter_link("with_std_dev_alloy", "Standard Deviation Alloy") %>
+  <%= clear_filter_link("on_or_after", "On Or After") %>
+  <%= clear_filter_link("on_or_before", "On Or Before") %>
+  <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code><%= params[:sorted_by] %></code></span>
+  <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code><%= params[:per_page] %></code></span>
+</div>

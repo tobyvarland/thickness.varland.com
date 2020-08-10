@@ -1,0 +1,38 @@
+<div class="w-35">
+  <% flash.each do |message_type, message| %>
+    <%
+      case message_type
+      when "notice"
+        message_type = "primary"
+      when "alert"
+        message_type = "warning"
+      when "error"
+        message_type = "danger"
+      end
+    %>
+    <div class="alert alert-<%= message_type %> mb-3 px-2 py-1 small font-weight-bold">
+      <%= message.html_safe %>
+      <button type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close">
+        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+      </button>
+    </div>
+  <% end %>
+  <%= form_with(url: login_url, method: "post", local: true, class: ["bg-light", "border", "rounded", "shadow-sm", "p-3", "clearfix"]) do %>
+    <div class="form-group">
+      <label for="username">System i Username: <%= required_field_indicator.html_safe %></label>
+      <%= text_field_tag(:username, "", class: "form-control", required: true, autofocus: true) %>
+    </div>
+    <div class="form-group">
+      <label for="password">System i Password: <%= required_field_indicator.html_safe %></label>
+      <%= password_field_tag(:password, "", class: "form-control", required: true) %>
+    </div>
+    <div class="custom-control custom-checkbox mb-3">
+      <%= check_box_tag(:remember_me, true, true, class: "custom-control-input") %>
+      <label class="custom-control-label" for="remember_me">Keep me signed in on this computer</label>
+    </div>
+    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-check"></i> Login</button>
+  <% end %>
+</div>
