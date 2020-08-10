@@ -36,7 +36,11 @@ class BlocksController < ApplicationController
     params[:per_page] = 50 if params[:per_page].blank?
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     @unpaged_blocks = apply_scopes(Block.includes(:user, :xray, :readings))
-    @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
+    begin
+      @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
+    rescue
+      @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page], page: 1)
+    end
     respond_to do |format|
       format.html
       format.xlsx {
