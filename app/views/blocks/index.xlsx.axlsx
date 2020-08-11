@@ -32,7 +32,7 @@ filters << {  field:  "Directory",
 filters << {  field:  "Product",
               value:  params[:with_product] } unless params[:with_product].blank?
 filters << {  field:  "Operator",
-              value:  User.find(params[:with_operator]).number_and_name } unless params[:with_operator].blank?
+              value:  User.find(params[:with_operator]).name } unless params[:with_operator].blank?
 filters << {  field:  "Mean Thickness",
               value:  params[:with_mean_thickness] } unless params[:with_mean_thickness].blank?
 filters << {  field:  "Min Thickness",
