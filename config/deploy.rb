@@ -11,7 +11,7 @@ set :repo_url, "git@github.com:tobyvarland/thickness.varland.com.git"
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
-append :linked_files, 'config/master.key', 'config/credentials.yml.enc'
+append :linked_files, 'config/master.key'
 set :keep_releases, 5
 # set :deploy_to, "/var/www/my_app_name"
 
