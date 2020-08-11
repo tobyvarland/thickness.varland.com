@@ -56,7 +56,7 @@ class ReadingsController < ApplicationController
   def destroy
     @reading.destroy
     respond_to do |format|
-      format.html { redirect_to readings_url, notice: 'Reading was successfully destroyed.' }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end

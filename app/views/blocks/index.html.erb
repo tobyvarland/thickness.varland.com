@@ -16,6 +16,11 @@
     <% if params[:show_statistics] == 'yes' %>
       <button class="btn btn-danger btn-sm ml-2" type="button" data-toggle="collapse" data-target="#thickness-stats"><i class="fas fa-chart-line"></i> Stats</button>
     <% end %>
+    <% if current_user %>
+      <%= link_to "<i class=\"fas fa-sign-out-alt\"></i> Logout".html_safe, logout_url, class: ["btn", "btn-sm", "ml-2", "btn-secondary"] %>
+    <% else %>
+      <%= link_to "<i class=\"fas fa-arrow-circle-right\"></i> Login".html_safe, login_url, class: ["btn", "btn-sm", "ml-2", "btn-secondary"] %>
+    <% end %>
   </div>
 </div>
 

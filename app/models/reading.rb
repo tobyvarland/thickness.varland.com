@@ -1,11 +1,14 @@
 class Reading < ApplicationRecord
 
+  # Soft deletes.
+  acts_as_paranoid
+
   # Relationships.
   belongs_to  :block
 
   # Scopes.
   default_scope { order(:reading_at) }
-  #with_alloy, -> { where.not(alloy: :nil) }
+  scope :with_alloy,  -> { where.not(alloy: nil) }
 
   # Callbacks.
   after_save    :update_block_stats

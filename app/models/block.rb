@@ -1,10 +1,12 @@
 class Block < ApplicationRecord
 
+  # Soft deletes.
+  acts_as_paranoid
+
   # Relationships.
   belongs_to  :xray
   belongs_to  :user
-  has_many    :readings,
-              dependent:  :restrict_with_error
+  has_many    :readings
 
   # Scopes.
   scope :with_alloy,  -> { where(has_alloy: true) }

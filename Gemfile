@@ -58,6 +58,7 @@ gem 'pagy'
 gem 'has_scope'
 gem 'caxlsx'
 gem 'caxlsx_rails'
+gem 'acts_as_paranoid', '~> 0.6.3'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

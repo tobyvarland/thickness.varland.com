@@ -36,6 +36,9 @@ $monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier
 .text-uncolor { color: $color-uncolor; }
 .bg-vp-red { background-color: $color-varland-red; }
 code { color: #e83e8c !important; }
+.vh-100 {
+  height: 100vh;
+}
 
 // Headings.
 h1, h2, h3, h4, h5, h6 {

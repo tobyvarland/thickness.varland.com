@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_144515) do
+ActiveRecord::Schema.define(version: 2020_08_11_221516) do
 
   create_table "blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "xray_id", null: false
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2020_08_07_144515) do
     t.float "std_dev_alloy"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_blocks_on_deleted_at"
     t.index ["user_id"], name: "index_blocks_on_user_id"
     t.index ["xray_id"], name: "index_blocks_on_xray_id"
   end
@@ -60,7 +62,9 @@ ActiveRecord::Schema.define(version: 2020_08_07_144515) do
     t.float "z_coordinate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["block_id"], name: "index_readings_on_block_id"
+    t.index ["deleted_at"], name: "index_readings_on_deleted_at"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
