@@ -3,8 +3,56 @@ wb = xlsx_package.workbook
 
 # Add sheet for filter summary.
 filters = []
+filters << {  field:  "Shop Order",
+              value:  params[:with_shop_order] } unless params[:with_shop_order].blank?
+filters << {  field:  "Load",
+              value:  params[:with_load] } unless params[:with_load].blank?
+filters << {  field:  "Rework",
+              value:  params[:with_rework] } unless params[:with_rework].blank?
+filters << {  field:  "Early Checks",
+              value:  params[:with_early] } unless params[:with_early].blank?
+filters << {  field:  "Strip Checks",
+              value:  params[:with_strip] } unless params[:with_strip].blank?
+filters << {  field:  "Customer",
+              value:  params[:with_customer] } unless params[:with_customer].blank?
+filters << {  field:  "Process",
+              value:  params[:with_process] } unless params[:with_process].blank?
+filters << {  field:  "Part ID",
+              value:  params[:with_part] } unless params[:with_part].blank?
+filters << {  field:  "Sub ID",
+              value:  params[:with_sub] } unless params[:with_sub].blank?
+filters << {  field:  "Part Name",
+              value:  params[:with_part_name] } unless params[:with_part_name].blank?
+filters << {  field:  "X-Ray",
+              value:  params[:with_xray] } unless params[:with_xray].blank?
 filters << {  field:  "Application",
               value:  params[:with_application] } unless params[:with_application].blank?
+filters << {  field:  "Directory",
+              value:  params[:with_directory] } unless params[:with_directory].blank?
+filters << {  field:  "Product",
+              value:  params[:with_product] } unless params[:with_product].blank?
+filters << {  field:  "Operator",
+              value:  User.find(params[:operator]).number_and_name } unless params[:operator].blank?
+filters << {  field:  "Mean Thickness",
+              value:  params[:with_mean_thickness] } unless params[:with_mean_thickness].blank?
+filters << {  field:  "Min Thickness",
+              value:  params[:with_min_thickness] } unless params[:with_min_thickness].blank?
+filters << {  field:  "Max Thickness",
+              value:  params[:with_max_thickness] } unless params[:with_max_thickness].blank?
+filters << {  field:  "Std Dev Thickness",
+              value:  params[:with_std_dev_thickness] } unless params[:with_std_dev_thickness].blank?
+filters << {  field:  "Mean Alloy",
+              value:  params[:with_mean_alloy] } unless params[:with_mean_alloy].blank?
+filters << {  field:  "Min Alloy",
+              value:  params[:with_min_alloy] } unless params[:with_min_alloy].blank?
+filters << {  field:  "Max Alloy",
+              value:  params[:with_max_alloy] } unless params[:with_max_alloy].blank?
+filters << {  field:  "Std Dev Alloy",
+              value:  params[:with_std_dev_alloy] } unless params[:with_std_dev_alloy].blank?
+filters << {  field:  "On Or After",
+              value:  params[:on_or_after] } unless params[:on_or_after].blank?
+filters << {  field:  "On Or Before",
+              value:  params[:on_or_before] } unless params[:on_or_before].blank?
 wb.add_worksheet(name: "Summary") do |sheet|
   sheet.add_row ["Export Summary"]
   sheet.add_row [""]
