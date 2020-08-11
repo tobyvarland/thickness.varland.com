@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
 
   # Persist filters to cookies.
   def filters_to_cookies(filters, options = {})
+    return
     global = options.fetch :global, true
     reset = options.fetch :reset, false
     filters.each do |f|

@@ -2,6 +2,20 @@ module ApplicationHelper
 
   include Pagy::Frontend
 
+  def calc_stats(data)
+    results = { mean: 0, min: 0, max: 0, std_dev: 0 }
+    return results if data.size == 0
+    sum = data.sum
+    results[:mean] = sum / data.size.to_f
+    results[:min] = data.min
+    results[:max] = data.max
+    sum_squared_diffs = 0.0
+    data.each {|d| sum_squared_diffs += (d - results[:mean])**2 }
+    variance = sum_squared_diffs / data.size.to_f
+    results[:std_dev] = Math.sqrt(variance)
+    return results
+  end
+
   def clear_filter_link(filter, label)
     symbol = filter.to_sym
     return if params[symbol].blank?

@@ -1,0 +1,147 @@
+<%
+  thickness_readings = []
+  alloy_readings = []
+  @unpaged_blocks.each do |block|
+    block.readings.each do |reading|
+      thickness_readings << reading.thickness
+      alloy_readings << reading.alloy unless reading.alloy.blank?
+    end
+  end
+  thickness_stats = calc_stats(thickness_readings)
+  alloy_stats = calc_stats(alloy_readings)
+%>
+<div class="p-3 collapse show row" id="thickness-stats">
+  <div class="col-3">
+    <table class="table table-bordered table-hover">
+      <tbody>
+        <tr>
+          <th class="bg-dark text-light" colspan="2">Stats</th>
+        </tr>
+        <tr>
+          <th class=""># Blocks</th>
+          <td class="text-right"><%= number_with_precision(@unpaged_blocks.size, precision: 0) %></td>
+        </tr>
+        <tr>
+          <th class=""># Readings</th>
+          <td class="text-right"><%= number_with_precision(thickness_readings.size, precision: 0) %></td>
+        </tr>
+        <tr>
+          <th class="bg-dark text-light" colspan="2">Thickness</th>
+        </tr>
+        <tr>
+          <th class="">Mean</th>
+          <td class="text-right"><%= number_with_precision(thickness_stats[:mean], precision: 3) %></td>
+        </tr>
+        <tr>
+          <th class="">Minimum</th>
+          <td class="text-right"><%= number_with_precision(thickness_stats[:min], precision: 3) %></td>
+        </tr>
+        <tr>
+          <th class="">Maximum</th>
+          <td class="text-right"><%= number_with_precision(thickness_stats[:max], precision: 3) %></td>
+        </tr>
+        <tr>
+          <th class="">Std. Dev.</th>
+          <td class="text-right"><%= number_with_precision(thickness_stats[:std_dev], precision: 3) %></td>
+        </tr>
+        <tr class="<%= alloy_readings.size == 0 ? "d-none" : nil %>">
+          <th class="bg-dark text-light" colspan="2">Alloy %</th>
+        </tr>
+        <tr class="<%= alloy_readings.size == 0 ? "d-none" : nil %>">
+          <th class="">Mean</th>
+          <td class="text-right"><%= number_with_precision(alloy_stats[:mean], precision: 3) %></td>
+        </tr>
+        <tr class="<%= alloy_readings.size == 0 ? "d-none" : nil %>">
+          <th class="">Minimum</th>
+          <td class="text-right"><%= number_with_precision(alloy_stats[:min], precision: 3) %></td>
+        </tr>
+        <tr class="<%= alloy_readings.size == 0 ? "d-none" : nil %>">
+          <th class="">Maximum</th>
+          <td class="text-right"><%= number_with_precision(alloy_stats[:max], precision: 3) %></td>
+        </tr>
+        <tr class="<%= alloy_readings.size == 0 ? "d-none" : nil %>">
+          <th class="">Std. Dev.</th>
+          <td class="text-right"><%= number_with_precision(alloy_stats[:std_dev], precision: 3) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-9">
+    <div class="thickness-chart-container ct-major-twelfth">
+    </div>
+    <div class="alloy-chart-container ct-major-twelfth mt-3 <%= alloy_readings.size == 0 ? "d-none" : nil %>">
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+// Store series' for thickness and alloy.
+var thicknessSeries = [];
+var alloySeries = [];
+<% @unpaged_blocks.each do |block| %>
+  thicknessSeries.push({
+    x: new Date("<%= block.block_at.iso8601 %>"),
+    y: <%= block.mean_thickness %>
+  });
+  alloySeries.push({
+    x: new Date("<%= block.block_at.iso8601 %>"),
+    y: <%= block.has_alloy? ? block.mean_alloy : "null" %>
+  });
+<% end %>
+
+// Define chart data.
+var thicknessChartData = {
+  series: [
+    { name: 'Thickness', data: thicknessSeries },
+  ]
+};
+var alloyChartData = {
+  series: [
+    { name: 'Alloy %', data: alloySeries },
+  ]
+};
+
+// Define chart options.
+var thicknessChartOptions = {
+  axisY: {
+    high: 1,
+    low: 0,
+    labelInterpolationFnc: function(value) {
+      return value.toFixed(3);
+    }
+  },
+  axisX: {
+    type: Chartist.FixedScaleAxis,
+    divisor: 10,
+    labelInterpolationFnc: function(value) {
+      return moment(value).format('MMM D');
+    }
+  },
+};
+var alloyChartOptions = {
+  axisY: {
+    high: 100,
+    low: 0,
+    labelInterpolationFnc: function(value) {
+      return value + "%";
+    }
+  },
+  axisX: {
+    type: Chartist.FixedScaleAxis,
+    divisor: 10,
+    labelInterpolationFnc: function(value) {
+      return moment(value).format('MMM D');
+    }
+  },
+};
+
+// Draw charts.
+var thicknessChart = new Chartist.Line('.thickness-chart-container',
+                                       thicknessChartData,
+                                       thicknessChartOptions);
+var alloyChart = new Chartist.Line('.alloy-chart-container',
+                                   alloyChartData,
+                                   alloyChartOptions);
+
+</script>

@@ -51,6 +51,7 @@
         <h5 class="filter-title text-warning mb-2">Options</h5>
         <%== filter_dropdown(f, :sorted_by, "Sort By", [["Oldest First", "oldest"], ["Newest First", "newest"]], no_sort: true, include_blank: false) %>
         <%== filter_number_field(f, :per_page, "Per Page") %>
+        <%== filter_dropdown(f, :show_statistics, "Show Group Stats", [["Yes", 'yes'], ["No", 'no']], no_sort: true, include_blank: false) %>
       </div>
     </div>
   <% end %>
@@ -107,11 +108,13 @@
             params[:on_or_after].blank? &&
             params[:on_or_before].blank? &&
             (params[:per_page].blank? || params[:per_page] == 50) &&
-            (params[:sorted_by].blank? || params[:sorted_by] == 'newest') %>
+            (params[:sorted_by].blank? || params[:sorted_by] == 'newest') &&
+            (params[:show_statistics].blank? || params[:show_statistics] == 'no') %>
   <%= link_to '<i class="far fa-times-circle"></i> Reset All'.html_safe,
               reset_filters_blocks_path,
               class: ['badge', 'badge-secondary', 'p-2', 'ml-2', 'mt-2'] %>
   <% end %>
   <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code><%= params[:sorted_by] %></code></span>
   <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code><%= params[:per_page] %></code></span>
+  <span class="badge badge-light p-2 ml-2 mt-2">Show Statistics: <code><%= params[:show_statistics] %></code></span>
 </div>

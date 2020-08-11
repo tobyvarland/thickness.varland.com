@@ -13,10 +13,17 @@
   <div class="m-2 d-print-none">
     <%= link_to '<i class="fas fa-file-excel"></i> Download'.html_safe, request.params.merge({format: :xlsx}), class: ['btn', 'btn-sm', 'btn-success', 'mr-2'] %>
     <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#thickness-filters"><i class="fas fa-filter"></i> Filters</button>
+    <% if params[:show_statistics] == 'yes' %>
+      <button class="btn btn-danger btn-sm ml-2" type="button" data-toggle="collapse" data-target="#thickness-stats"><i class="fas fa-chart-line"></i> Stats</button>
+    <% end %>
   </div>
 </div>
 
 <%= render partial: 'filter_form' %>
+
+<% if params[:show_statistics] == 'yes' %>
+  <%= render partial: 'statistics' %>
+<% end %>
 
 <table class="table table-striped table-hover border-bottom mb-0 thickness-data-table">
   <thead class="thead-dark sticky">

@@ -193,6 +193,39 @@ hr {
   }
 }
 
+// Stats.
+#thickness-stats {
+  border-bottom: 1px solid #454d55 !important;
+  &:empty {
+    display: none;
+  }
+  /*
+  .thickness-chart-container {
+    padding-top: 56.25%;
+    width: 100%;
+    position: relative;
+    div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  */
+}
+
+/*
+.ct-series-a .ct-line {
+  stroke-width: 0;
+}
+.ct-series-a .ct-point {
+  stroke: red;
+  stroke-width: 10px;
+  stroke-linecap: circle;
+}
+*/
+
 @media print {
   h1 { color: #000 !important; }
   body { padding-top: 0 !important; }
