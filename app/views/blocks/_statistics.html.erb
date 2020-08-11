@@ -105,8 +105,8 @@ var alloyChartData = {
 // Define chart options.
 var thicknessChartOptions = {
   axisY: {
-    high: 1,
-    low: 0,
+    high: <%= thickness_stats[:max] + 0.1 %>,
+    low: <%= thickness_stats[:min] - 0.1 %>,
     labelInterpolationFnc: function(value) {
       return value.toFixed(3);
     }
@@ -121,10 +121,10 @@ var thicknessChartOptions = {
 };
 var alloyChartOptions = {
   axisY: {
-    high: 100,
-    low: 0,
+    high: <%= [alloy_stats[:max] + 10, 100].min %>,
+    low: <%= [alloy_stats[:min] - 10, 0].max %>,
     labelInterpolationFnc: function(value) {
-      return value + "%";
+      return value.toFixed(1) + "%";
     }
   },
   axisX: {
