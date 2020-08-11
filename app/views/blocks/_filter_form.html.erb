@@ -1,7 +1,6 @@
 <div class="bg-dark text-light p-3 collapse" id="thickness-filters">
   <%= form_with url: blocks_path,
               method: 'get' do |f| %>
-    <%= f.hidden_field(:reset, value: nil ) %>
     <p class="text-warning small font-weight-bold text-uppercase">When filtering by thickness or alloy percentage, include an operator and value in the filter box: <code>&gt; 0.325</code>.</p>
     <div class="row">
       <div class="col">
