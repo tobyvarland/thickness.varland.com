@@ -82,6 +82,9 @@
   <%= clear_filter_link("with_std_dev_alloy", "Standard Deviation Alloy") %>
   <%= clear_filter_link("on_or_after", "On Or After") %>
   <%= clear_filter_link("on_or_before", "On Or Before") %>
+  <%= clear_filter_link("show_statistics", "Show Statistics") unless params[:show_statistics] == 'no' %>
+  <%= clear_filter_link("sorted_by", "Sort By") unless params[:sorted_by] == 'newest' %>
+  <%= clear_filter_link("per_page", "Items/Page") unless params[:per_page].to_s == '50' %>
   <% unless params[:with_shop_order].blank? &&
             params[:with_load].blank? &&
             params[:with_rework].blank? &&
@@ -114,7 +117,13 @@
               reset_filters_blocks_path,
               class: ['badge', 'badge-secondary', 'p-2', 'ml-2', 'mt-2'] %>
   <% end %>
-  <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code><%= params[:sorted_by] %></code></span>
-  <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code><%= params[:per_page] %></code></span>
-  <span class="badge badge-light p-2 ml-2 mt-2">Show Statistics: <code><%= params[:show_statistics] %></code></span>
+  <% if params[:sorted_by] == 'newest' %>
+  <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code>newest</code></span>
+  <% end %>
+  <% if params[:per_page].to_s == '50' %>
+  <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code>50</code></span>
+  <% end %>
+  <% if params[:show_statistics] == 'no' %>
+    <span class="badge badge-light p-2 ml-2 mt-2">Show Statistics: <code>no</code></span>
+  <% end %>
 </div>
