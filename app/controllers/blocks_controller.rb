@@ -30,9 +30,67 @@ class BlocksController < ApplicationController
 
   before_action :set_block, only: [:show, :edit, :update, :destroy]
 
+  def reset_filters
+    filters_to_cookies([:per_page,
+                        :sorted_by,
+                        :with_shop_order,
+                        :with_load,
+                        :with_rework,
+                        :with_early,
+                        :with_strip,
+                        :with_customer,
+                        :with_process,
+                        :with_part,
+                        :with_sub,
+                        :with_part_name,
+                        :with_xray,
+                        :with_application,
+                        :with_directory,
+                        :with_product,
+                        :with_operator,
+                        :with_mean_thickness,
+                        :with_min_thickness,
+                        :with_max_thickness,
+                        :with_std_dev_thickness,
+                        :with_mean_alloy,
+                        :with_min_alloy,
+                        :with_max_alloy,
+                        :with_std_dev_alloy,
+                        :on_or_after,
+                        :on_or_before], reset: true)
+    redirect_to blocks_path
+  end
+
   # GET /blocks
   # GET /blocks.json
   def index
+    filters_to_cookies([:per_page,
+                        :sorted_by,
+                        :with_shop_order,
+                        :with_load,
+                        :with_rework,
+                        :with_early,
+                        :with_strip,
+                        :with_customer,
+                        :with_process,
+                        :with_part,
+                        :with_sub,
+                        :with_part_name,
+                        :with_xray,
+                        :with_application,
+                        :with_directory,
+                        :with_product,
+                        :with_operator,
+                        :with_mean_thickness,
+                        :with_min_thickness,
+                        :with_max_thickness,
+                        :with_std_dev_thickness,
+                        :with_mean_alloy,
+                        :with_min_alloy,
+                        :with_max_alloy,
+                        :with_std_dev_alloy,
+                        :on_or_after,
+                        :on_or_before])
     params[:per_page] = 50 if params[:per_page].blank?
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     @unpaged_blocks = apply_scopes(Block.includes(:user, :xray, :readings))

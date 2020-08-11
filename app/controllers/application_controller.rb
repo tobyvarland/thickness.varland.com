@@ -33,11 +33,12 @@ class ApplicationController < ActionController::Base
   end
 
   # Persist filters to cookies.
-  def filters_to_cookies(filters)
-
+  def filters_to_cookies(filters, options = {})
+    global = options.fetch :global, true
+    reset = options.fetch :reset, false
     filters.each do |f|
       cookie_name = global ? f : "#{params[:controller]}_#{params[:action]}_#{f}"
-      if params[:reset]
+      if params[:reset] || reset
         cookies[cookie_name] = ""
       else
         if params[f]

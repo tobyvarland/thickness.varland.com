@@ -1,6 +1,7 @@
 <div class="bg-dark text-light p-3 collapse" id="thickness-filters">
   <%= form_with url: blocks_path,
               method: 'get' do |f| %>
+    <%= f.hidden_field(:reset, value: nil ) %>
     <p class="text-warning small font-weight-bold text-uppercase">When filtering by thickness or alloy percentage, include an operator and value in the filter box: <code>&gt; 0.325</code>.</p>
     <div class="row">
       <div class="col">
@@ -108,33 +109,7 @@
             (params[:per_page].blank? || params[:per_page] == 50) &&
             (params[:sorted_by].blank? || params[:sorted_by] == 'newest') %>
   <%= link_to '<i class="far fa-times-circle"></i> Reset All'.html_safe,
-              request.params.merge({with_shop_order:        nil,
-                                    with_load:              nil,
-                                    with_rework:            nil,
-                                    with_early:             nil,
-                                    with_strip:             nil,
-                                    with_customer:          nil,
-                                    with_process:           nil,
-                                    with_part:              nil,
-                                    with_sub:               nil,
-                                    with_part_name:         nil,
-                                    with_xray:              nil,
-                                    with_application:       nil,
-                                    with_directory:         nil,
-                                    with_product:           nil,
-                                    with_operator:          nil,
-                                    with_mean_thickness:    nil,
-                                    with_min_thickness:     nil,
-                                    with_max_thickness:     nil,
-                                    with_std_dev_thickness: nil,
-                                    with_mean_alloy:        nil,
-                                    with_min_alloy:         nil,
-                                    with_max_alloy:         nil,
-                                    with_std_dev_alloy:     nil,
-                                    on_or_after:            nil,
-                                    on_or_before:           nil,
-                                    sorted_by:              nil,
-                                    per_page:               nil}),
+              reset_filters_blocks_path,
               class: ['badge', 'badge-secondary', 'p-2', 'ml-2', 'mt-2'] %>
   <% end %>
   <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code><%= params[:sorted_by] %></code></span>
