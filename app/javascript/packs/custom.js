@@ -7,7 +7,7 @@ var LinkValidator = {
     $(LinkValidator.selector).each(function() {
       var link = $(this);
       $.ajax({
-        type: 'get',
+        type: 'HEAD',
         url: link.attr("href"),
         error: function() {
           link.remove();
