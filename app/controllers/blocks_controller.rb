@@ -36,7 +36,7 @@ class BlocksController < ApplicationController
     params[:per_page] = 50 if params[:per_page].blank?
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     params[:show_statistics] = 'no' if params[:show_statistics].blank?
-    params[:on_or_after] = 6.months.ago if params[:on_or_after].blank?
+    params[:on_or_after] = Date.today - 6.months if params[:on_or_after].blank?
     @unpaged_blocks = apply_scopes(Block.includes(:user, :xray, :readings))
     begin
       @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
