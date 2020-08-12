@@ -5,21 +5,23 @@
     <% unless block.shop_order == 111 %>
       <hr>
       <%= part_spec(block) %>
-      <hr>
-      <span class="part-name"><%= block.part_name.join("<br>").html_safe %></span>
+      <% if block.part_name %>
+        <hr>
+        <span class="part-name"><%= block.part_name.join("<br>").html_safe %></span>
+      <% end %>
     <% end %>
   </td>
   <td class="text-center"><%= load_with_badges(block) %></td>
   <td>
     <span class="field-label">X-Ray</span>
-    <span class="value"><%= link_to block.xray.id, request.params.merge({with_xray: block.xray_id}) %></span>
+    <span class="value"><%= link_to block.xray_id, request.params.merge({with_xray: block.xray_id}) %></span>
     <hr>
     <span class="dir-prod-app">
       <span>Application</span> <%= link_to block.application, request.params.merge({with_application: block.application}) %><br>
       <span>Directory</span> <%= link_to block.directory, request.params.merge({with_directory: block.directory}) %><br>
       <span>Product</span> <%= link_to block.product, request.params.merge({with_product: block.product}) %><br>
       <span>Block #</span> <%= block.number %>
-      <% if current_user && current_user.employee_number >= 600 %>
+      <% if @thickness_user && @thickness_user.employee_number >= 600 %>
         <%= link_to '<i class="fas fa-trash-alt text-danger small"></i>'.html_safe, block, method: :delete, data: { confirm: "Are you sure you want to delete this block?\n\nNote: if necessary, IT can recover this block later." } %>
       <% end %>
     </span>
@@ -59,7 +61,7 @@
           <tr>
             <td class="text-center">
               <%= reading.number %>
-              <% if current_user && current_user.employee_number >= 600 %>
+              <% if @thickness_user && @thickness_user.employee_number >= 600 %>
                 <%= link_to '<i class="fas fa-trash-alt text-danger small"></i>'.html_safe, reading, method: :delete, data: { confirm: "Are you sure you want to delete this reading?\n\nNote: if necessary, IT can recover this reading later." } %>
               <% end %>
             </td>

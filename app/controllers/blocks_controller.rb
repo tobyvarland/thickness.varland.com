@@ -1,43 +1,43 @@
 class BlocksController < ApplicationController
 
   # Use has_scope gem for filtering.
-  has_scope :sorted_by
-  has_scope :on_or_after
-  has_scope :on_or_before
-  has_scope :with_shop_order
-  has_scope :with_load
-  has_scope :with_rework
-  has_scope :with_early
-  has_scope :with_strip
-  has_scope :with_customer
-  has_scope :with_process
-  has_scope :with_part
-  has_scope :with_sub
-  has_scope :with_part_name
-  has_scope :with_xray
-  has_scope :with_application
-  has_scope :with_directory
-  has_scope :with_product
-  has_scope :with_operator
-  has_scope :with_mean_thickness
-  has_scope :with_min_thickness
-  has_scope :with_max_thickness
-  has_scope :with_std_dev_thickness
-  has_scope :with_mean_alloy
-  has_scope :with_min_alloy
-  has_scope :with_max_alloy
-  has_scope :with_std_dev_alloy
+  has_scope :sorted_by, only: :index
+  has_scope :on_or_after, default: (Date.today - 6.months), only: :index
+  has_scope :on_or_before, only: :index
+  has_scope :with_shop_order, only: :index
+  has_scope :with_load, only: :index
+  has_scope :with_rework, only: :index
+  has_scope :with_early, only: :index
+  has_scope :with_strip, only: :index
+  has_scope :with_customer, only: :index
+  has_scope :with_process, only: :index
+  has_scope :with_part, only: :index
+  has_scope :with_sub, only: :index
+  has_scope :with_part_name, only: :index
+  has_scope :with_xray, only: :index
+  has_scope :with_application, only: :index
+  has_scope :with_directory, only: :index
+  has_scope :with_product, only: :index
+  has_scope :with_operator, only: :index
+  has_scope :with_mean_thickness, only: :index
+  has_scope :with_min_thickness, only: :index
+  has_scope :with_max_thickness, only: :index
+  has_scope :with_std_dev_thickness, only: :index
+  has_scope :with_mean_alloy, only: :index
+  has_scope :with_min_alloy, only: :index
+  has_scope :with_max_alloy, only: :index
+  has_scope :with_std_dev_alloy, only: :index
 
   before_action :set_block, only: [:show, :edit, :update, :destroy]
 
   # GET /blocks
   # GET /blocks.json
   def index
+    @thickness_user = current_user
     params[:per_page] = 50 if params[:per_page].blank?
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     params[:show_statistics] = 'no' if params[:show_statistics].blank?
-    params[:on_or_after] = Date.today - 6.months if params[:on_or_after].blank?
-    @unpaged_blocks = apply_scopes(Block.includes(:user, :xray, :readings))
+    @unpaged_blocks = apply_scopes(Block.includes(:user, :readings))
     begin
       @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
     rescue

@@ -18,7 +18,7 @@
     <% else %>
       <%= link_to '<i class="fas fa-chart-line"></i> Show Stats'.html_safe, request.params.merge({show_statistics: 'yes'}), class: ['btn', 'btn-sm', 'btn-danger', 'ml-2'] %>
     <% end %>
-    <% if current_user %>
+    <% if @thickness_user %>
       <%= link_to "<i class=\"fas fa-sign-out-alt\"></i> Logout".html_safe, logout_url, class: ["btn", "btn-sm", "ml-2", "btn-secondary"] %>
     <% else %>
       <%= link_to "<i class=\"fas fa-arrow-circle-right\"></i> Login".html_safe, login_url, class: ["btn", "btn-sm", "ml-2", "btn-secondary"] %>
