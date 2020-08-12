@@ -30,10 +30,6 @@ class BlocksController < ApplicationController
 
   before_action :set_block, only: [:show, :edit, :update, :destroy]
 
-  def reset_filters
-    redirect_to root_path
-  end
-
   # GET /blocks
   # GET /blocks.json
   def index

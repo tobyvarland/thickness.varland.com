@@ -8,11 +8,7 @@ Rails.application.routes.draw do
   post  "logout",               to: "sessions#destroy"
 
   resources :readings
-  resources :blocks do
-    collection do
-      get 'reset_filters'
-    end
-  end
+  resources :blocks
   resources :xrays
   
 end

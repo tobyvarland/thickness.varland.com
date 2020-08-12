@@ -14,7 +14,9 @@
     <%= link_to '<i class="fas fa-file-excel"></i> Download'.html_safe, request.params.merge({format: :xlsx}), class: ['btn', 'btn-sm', 'btn-success', 'mr-2'] %>
     <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#thickness-filters"><i class="fas fa-filter"></i> Filters</button>
     <% if params[:show_statistics] == 'yes' %>
-      <button class="btn btn-danger btn-sm ml-2" type="button" data-toggle="collapse" data-target="#thickness-stats"><i class="fas fa-chart-line"></i> Stats</button>
+      <%= link_to '<i class="fas fa-chart-line"></i> Hide Stats'.html_safe, request.params.merge({show_statistics: nil}), class: ['btn', 'btn-sm', 'btn-danger', 'ml-2'] %>
+    <% else %>
+      <%= link_to '<i class="fas fa-chart-line"></i> Show Stats'.html_safe, request.params.merge({show_statistics: 'yes'}), class: ['btn', 'btn-sm', 'btn-danger', 'ml-2'] %>
     <% end %>
     <% if current_user %>
       <%= link_to "<i class=\"fas fa-sign-out-alt\"></i> Logout".html_safe, logout_url, class: ["btn", "btn-sm", "ml-2", "btn-secondary"] %>

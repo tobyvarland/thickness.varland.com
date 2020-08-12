@@ -50,7 +50,6 @@
         <h5 class="filter-title text-warning mb-2">Options</h5>
         <%== filter_dropdown(f, :sorted_by, "Sort By", [["Oldest First", "oldest"], ["Newest First", "newest"]], no_sort: true, include_blank: false) %>
         <%== filter_number_field(f, :per_page, "Per Page") %>
-        <%== filter_dropdown(f, :show_statistics, "Show Group Stats", [["Yes", 'yes'], ["No", 'no']], no_sort: true, include_blank: false) %>
       </div>
     </div>
   <% end %>
@@ -81,7 +80,6 @@
   <%= clear_filter_link("with_std_dev_alloy", "Standard Deviation Alloy") %>
   <%= clear_filter_link("on_or_after", "On Or After") %>
   <%= clear_filter_link("on_or_before", "On Or Before") %>
-  <%= clear_filter_link("show_statistics", "Show Statistics") unless params[:show_statistics] == 'no' %>
   <%= clear_filter_link("sorted_by", "Sort By") unless params[:sorted_by] == 'newest' %>
   <%= clear_filter_link("per_page", "Items/Page") unless params[:per_page].to_s == '50' %>
   <% unless params[:with_shop_order].blank? &&
@@ -110,19 +108,15 @@
             params[:on_or_after].blank? &&
             params[:on_or_before].blank? &&
             (params[:per_page].blank? || params[:per_page] == 50) &&
-            (params[:sorted_by].blank? || params[:sorted_by] == 'newest') &&
-            (params[:show_statistics].blank? || params[:show_statistics] == 'no') %>
-  <%= link_to '<i class="far fa-times-circle"></i> Reset All'.html_safe,
-              reset_filters_blocks_path,
-              class: ['badge', 'badge-secondary', 'p-2', 'ml-2', 'mt-2'] %>
+            (params[:sorted_by].blank? || params[:sorted_by] == 'newest') %>
+    <%= link_to '<i class="far fa-times-circle"></i> Reset All'.html_safe,
+                root_url,
+                class: ['badge', 'badge-secondary', 'p-2', 'ml-2', 'mt-2'] %>
   <% end %>
   <% if params[:sorted_by] == 'newest' %>
   <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code>newest</code></span>
   <% end %>
   <% if params[:per_page].to_s == '50' %>
   <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code>50</code></span>
-  <% end %>
-  <% if params[:show_statistics] == 'no' %>
-    <span class="badge badge-light p-2 ml-2 mt-2">Show Statistics: <code>no</code></span>
   <% end %>
 </div>
