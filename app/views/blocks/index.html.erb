@@ -12,7 +12,7 @@
   </div>
   <div class="m-2 d-print-none">
     <%= link_to '<i class="fas fa-file-excel"></i> Download'.html_safe, request.params.merge({format: :xlsx}), class: ['btn', 'btn-sm', 'btn-success', 'mr-2'] %>
-    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#thickness-filters"><i class="fas fa-filter"></i> Filters</button>
+    <button class="btn btn-primary btn-sm filters-button" type="button" data-toggle="collapse" data-target="#thickness-filters"><i class="fas fa-filter"></i> Filters</button>
     <% if params[:show_statistics] == 'yes' %>
       <%= link_to '<i class="fas fa-chart-line"></i> Hide Stats'.html_safe, reset_filter_blocks_url(filter: :show_statistics), class: ['btn', 'btn-sm', 'btn-danger', 'ml-2'] %>
     <% else %>
