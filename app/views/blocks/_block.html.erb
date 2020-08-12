@@ -3,7 +3,7 @@
     <span class="field-label">SO</span>
     <span class="value"><%= link_to block.shop_order, request.params.merge({with_shop_order: block.shop_order}) %></span>
     <% unless block.shop_order == 111 %>
-      <%= link_to '<i class="fas fa-file-pdf text-danger"></i>'.html_safe, "http://so.varland.com/so/#{block.shop_order}.pdf", target: "_blank", class: ["small", "shop-order-pdf"] %>
+      <%= link_to '<i class="fas fa-file-pdf text-danger"></i>'.html_safe, "http://so.varland.com/so/#{block.shop_order}.pdf", target: "_blank", class: ["small", "shop-order-pdf", "d-none"] %>
       <hr>
       <%= part_spec(block) %>
       <% if block.part_name %>

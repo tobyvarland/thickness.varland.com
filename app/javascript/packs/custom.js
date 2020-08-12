@@ -12,6 +12,9 @@ var LinkValidator = {
         error: function() {
           link.remove();
         },
+        success: function() {
+          link.removeClass("d-none").css({'opacity':0}).animate({'opacity':1});
+        },
       });
     })
   }
