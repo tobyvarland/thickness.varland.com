@@ -19,11 +19,11 @@
         </tr>
         <tr>
           <th class=""># Blocks</th>
-          <td class="text-right"><%= number_with_precision(@unpaged_blocks.size, precision: 0) %></td>
+          <td class="text-right"><%= number_with_delimiter(@unpaged_blocks.size) %></td>
         </tr>
         <tr>
           <th class=""># Readings</th>
-          <td class="text-right"><%= number_with_precision(thickness_readings.size, precision: 0) %></td>
+          <td class="text-right"><%= number_with_delimiter(thickness_readings.size) %></td>
         </tr>
         <tr>
           <th class="bg-dark text-light" colspan="2">Thickness</th>
