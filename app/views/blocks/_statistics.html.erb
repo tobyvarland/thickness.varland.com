@@ -115,7 +115,7 @@ var thicknessChartOptions = {
     type: Chartist.FixedScaleAxis,
     divisor: 10,
     labelInterpolationFnc: function(value) {
-      return moment(value).format('MMM D');
+      return moment(value).format('MM/DD/YY');
     }
   },
 };
@@ -131,7 +131,7 @@ var alloyChartOptions = {
     type: Chartist.FixedScaleAxis,
     divisor: 10,
     labelInterpolationFnc: function(value) {
-      return moment(value).format('MMM D');
+      return moment(value).format('MM/DD/YY');
     }
   },
 };

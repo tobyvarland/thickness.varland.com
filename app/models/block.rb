@@ -5,7 +5,8 @@ class Block < ApplicationRecord
 
   # Relationships.
   belongs_to  :xray
-  belongs_to  :user
+  belongs_to  :user,
+              optional: true
   has_many    :readings
 
   # Scopes.

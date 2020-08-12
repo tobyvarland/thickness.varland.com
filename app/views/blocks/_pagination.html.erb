@@ -14,7 +14,7 @@
         <form class="mr-1">
           <input type="number" class="text-center" id="page" name="page" value="<%= pagy.page %>" min="1" max="<%= pagy.pages %>" step="1" onchange="this.form.submit()" />
         </form>
-        <span>of <%= pagy.pages %></span>
+        <span>of <%= number_with_delimiter(pagy.pages) %></span>
       </div>
       <% if pagy.next %>
         <%== link.call(pagy.next, '<i class="fas fa-angle-right"></i>') %>
