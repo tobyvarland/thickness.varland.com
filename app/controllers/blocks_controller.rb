@@ -2,7 +2,7 @@ class BlocksController < ApplicationController
 
   # Use has_scope gem for filtering.
   has_scope :sorted_by, only: :index
-  has_scope :on_or_after, default: (Date.today - 6.months), only: :index
+  has_scope :on_or_after, only: :index
   has_scope :on_or_before, only: :index
   has_scope :with_shop_order, only: :index
   has_scope :with_load, only: :index
