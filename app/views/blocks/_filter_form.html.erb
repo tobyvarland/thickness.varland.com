@@ -1,7 +1,37 @@
+<div class="modal fade" id="filter-instructions" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Filter Help</h5>
+        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          When filtering by any of the fields in the <strong>thickness</strong> or <strong>alloy %</strong>
+          columns, there are a variety of ways you can filter:
+        </p>
+        <p>
+          Entering <code>&gt; 0.25</code> will show you all values greater than 0.25. Similarly, you
+          can use <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>=</code>, and
+          <code>!=</code> (not equal).
+        </p>
+        <p class="mb-0">
+          Finally, for a more advanced search, you can enter <code>BETWEEN 0.2 AND 0.3</code> or
+          <code>NOT BETWEEN 0.2 AND 0.3</code> to perform a range search.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="bg-dark text-light p-3 collapse" id="thickness-filters">
   <%= form_with url: blocks_path,
               method: 'get' do |f| %>
-    <p class="text-warning small font-weight-bold text-uppercase">When filtering by thickness or alloy percentage, include an operator and value in the filter box: <code>&gt; 0.325</code>.</p>
+    <p class="d-none text-warning small font-weight-bold text-uppercase">When filtering by thickness or alloy percentage, include an operator and value in the filter box: <code>&gt; 0.325</code>.</p>
+    <button type="button" class="float-right btn btn-warning btn-sm mb-3" data-toggle="modal" data-target="#filter-instructions">
+      Filter Instructions
+    </button>
+    <div class="clearfix"></div>
     <div class="row">
       <div class="col">
         <h5 class="filter-title text-warning mb-2">Shop Order/Load</h5>
