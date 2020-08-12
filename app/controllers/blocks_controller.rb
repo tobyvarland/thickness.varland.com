@@ -33,10 +33,12 @@ class BlocksController < ApplicationController
   # GET /blocks
   # GET /blocks.json
   def index
+    filters_to_cookies(all_filters)
     @thickness_user = current_user
     params[:per_page] = 50 if params[:per_page].blank?
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     params[:show_statistics] = 'no' if params[:show_statistics].blank?
+    count_filters
     @unpaged_blocks = apply_scopes(Block.includes(:user, :readings))
     begin
       @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
@@ -50,6 +52,16 @@ class BlocksController < ApplicationController
         response.headers['Content-Disposition'] = "attachment; filename=\"ThicknessExport_#{timestamp}.xlsx\""
       }
     end
+  end
+
+  def reset_filters
+    filters_to_cookies(all_filters, reset: true)
+    redirect_to root_url
+  end
+
+  def reset_filter
+    filters_to_cookies([params[:filter]], reset: true)
+    redirect_to root_url
   end
 
   # GET /blocks/1
@@ -107,6 +119,74 @@ class BlocksController < ApplicationController
   end
 
   private
+
+    def count_filters
+      @count_filters = 0
+      @count_filters += 1 unless params[:per_page].to_i == 50
+      @count_filters += 1 unless params[:sorted_by] == 'newest'
+      @count_filters += 1 unless params[:show_statistics] == 'no'
+      @count_filters += 1 unless params[:on_or_after].blank?
+      @count_filters += 1 unless params[:on_or_before].blank?
+      @count_filters += 1 unless params[:with_shop_order].blank?
+      @count_filters += 1 unless params[:with_load].blank?
+      @count_filters += 1 unless params[:with_rework].blank?
+      @count_filters += 1 unless params[:with_early].blank?
+      @count_filters += 1 unless params[:with_strip].blank?
+      @count_filters += 1 unless params[:with_customer].blank?
+      @count_filters += 1 unless params[:with_process].blank?
+      @count_filters += 1 unless params[:with_part].blank?
+      @count_filters += 1 unless params[:with_sub].blank?
+      @count_filters += 1 unless params[:with_part_name].blank?
+      @count_filters += 1 unless params[:with_xray].blank?
+      @count_filters += 1 unless params[:with_application].blank?
+      @count_filters += 1 unless params[:with_directory].blank?
+      @count_filters += 1 unless params[:with_product].blank?
+      @count_filters += 1 unless params[:with_operator].blank?
+      @count_filters += 1 unless params[:with_mean_thickness].blank?
+      @count_filters += 1 unless params[:with_min_thickness].blank?
+      @count_filters += 1 unless params[:with_max_thickness].blank?
+      @count_filters += 1 unless params[:with_std_dev_thickness].blank?
+      @count_filters += 1 unless params[:with_mean_alloy].blank?
+      @count_filters += 1 unless params[:with_min_alloy].blank?
+      @count_filters += 1 unless params[:with_max_alloy].blank?
+      @count_filters += 1 unless params[:with_std_dev_alloy].blank?
+      @count_filters += 1 unless params[:page].blank?
+    end
+
+    def all_filters
+      [
+        :on_or_after,
+        :on_or_before,
+        :sorted_by,
+        :per_page,
+        :with_shop_order,
+        :with_load,
+        :with_rework,
+        :with_early,
+        :with_strip,
+        :with_customer,
+        :with_process,
+        :with_part,
+        :with_sub,
+        :with_part_name,
+        :with_xray,
+        :with_application,
+        :with_directory,
+        :with_product,
+        :with_operator,
+        :with_mean_thickness,
+        :with_min_thickness,
+        :with_max_thickness,
+        :with_std_dev_thickness,
+        :with_mean_alloy,
+        :with_min_alloy,
+        :with_max_alloy,
+        :with_std_dev_alloy,
+        :show_statistics,
+        :page
+      ]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_block
       @block = Block.find(params[:id])

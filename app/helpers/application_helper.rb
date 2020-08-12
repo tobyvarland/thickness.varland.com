@@ -45,7 +45,7 @@ module ApplicationHelper
         value = 'Exclude Strip Checks'
       end
     end
-    link_to "<i class=\"fas fa-times-circle\"></i> #{label}: <code>#{value}</code>".html_safe, request.params.merge({symbol => nil}), class: ["badge", "badge-warning", "p-2", "ml-2", "mt-2"]
+    link_to "<i class=\"fas fa-times-circle\"></i> #{label}: <code>#{value}</code>".html_safe, reset_filter_blocks_url(filter: symbol), class: ["badge", "badge-warning", "p-2", "ml-2", "mt-2"]
   end
 
   def required_field_indicator

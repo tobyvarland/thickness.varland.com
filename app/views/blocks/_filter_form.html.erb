@@ -82,41 +82,15 @@
   <%= clear_filter_link("on_or_before", "On Or Before") %>
   <%= clear_filter_link("sorted_by", "Sort By") unless params[:sorted_by] == 'newest' %>
   <%= clear_filter_link("per_page", "Items/Page") unless params[:per_page].to_s == '50' %>
-  <% unless params[:with_shop_order].blank? &&
-            params[:with_load].blank? &&
-            params[:with_rework].blank? &&
-            params[:with_early].blank? &&
-            params[:with_strip].blank? &&
-            params[:with_customer].blank? &&
-            params[:with_process].blank? &&
-            params[:with_part].blank? &&
-            params[:with_sub].blank? &&
-            params[:with_part_name].blank? &&
-            params[:with_xray].blank? &&
-            params[:with_application].blank? &&
-            params[:with_directory].blank? &&
-            params[:with_product].blank? &&
-            params[:with_operator].blank? &&
-            params[:with_mean_thickness].blank? &&
-            params[:with_min_thickness].blank? &&
-            params[:with_max_thickness].blank? &&
-            params[:with_std_dev_thickness].blank? &&
-            params[:with_mean_alloy].blank? &&
-            params[:with_min_alloy].blank? &&
-            params[:with_max_alloy].blank? &&
-            params[:with_std_dev_alloy].blank? &&
-            params[:on_or_after].blank? &&
-            params[:on_or_before].blank? &&
-            (params[:per_page].blank? || params[:per_page] == 50) &&
-            (params[:sorted_by].blank? || params[:sorted_by] == 'newest') %>
+  <% unless @count_filters == 0 %>
     <%= link_to '<i class="far fa-times-circle"></i> Reset All'.html_safe,
-                root_url,
+                reset_filters_blocks_url,
                 class: ['badge', 'badge-secondary', 'p-2', 'ml-2', 'mt-2'] %>
   <% end %>
   <% if params[:sorted_by] == 'newest' %>
-  <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code>newest</code></span>
+    <span class="badge badge-light p-2 ml-2 mt-2">Sorted By: <code>newest</code></span>
   <% end %>
   <% if params[:per_page].to_s == '50' %>
-  <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code>50</code></span>
+    <span class="badge badge-light p-2 ml-2 mt-2">Items/Page: <code>50</code></span>
   <% end %>
 </div>
