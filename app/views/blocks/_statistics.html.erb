@@ -10,7 +10,7 @@
   thickness_stats = calc_stats(thickness_readings)
   alloy_stats = calc_stats(alloy_readings)
 %>
-<div class="p-3 collapsex showx row" id="thickness-stats">
+<div class="row py-3 mx-0" id="thickness-stats">
   <div class="col-3">
     <table class="table table-bordered table-hover">
       <tbody>
@@ -67,9 +67,9 @@
     </table>
   </div>
   <div class="col-9">
-    <div class="thickness-chart-container ct-major-twelfth">
+    <div class="thickness-chart-container ct-double-octave">
     </div>
-    <div class="alloy-chart-container ct-major-twelfth mt-3 <%= alloy_readings.size == 0 ? "d-none" : nil %>">
+    <div class="alloy-chart-container ct-double-octave mt-3 <%= alloy_readings.size == 0 ? "d-none" : nil %>">
     </div>
   </div>
 </div>
