@@ -22,7 +22,7 @@
       <span>Directory</span> <%= link_to block.directory, request.params.merge({with_directory: block.directory}) %><br>
       <span>Product</span> <%= link_to block.product, request.params.merge({with_product: block.product}) %><br>
       <span>Block #</span> <%= block.number %>
-      <% if @thickness_user && @thickness_user.employee_number >= 600 %>
+      <% if @thickness_user && (@thickness_user.employee_number >= 600 || @thickness_user.employee_number == 442) %>
         <%= link_to '<i class="fas fa-trash-alt text-danger small"></i>'.html_safe, block, method: :delete, data: { confirm: "Are you sure you want to delete this block?\n\nNote: if necessary, IT can recover this block later." } %>
       <% end %>
     </span>
@@ -62,7 +62,7 @@
           <tr>
             <td class="text-center">
               <%= reading.number %>
-              <% if @thickness_user && @thickness_user.employee_number >= 600 %>
+              <% if @thickness_user && (@thickness_user.employee_number >= 600 || @thickness_user.employee_number == 442) %>
                 <%= link_to '<i class="fas fa-trash-alt text-danger small"></i>'.html_safe, reading, method: :delete, data: { confirm: "Are you sure you want to delete this reading?\n\nNote: if necessary, IT can recover this reading later." } %>
               <% end %>
             </td>
