@@ -39,11 +39,11 @@ class BlocksController < ApplicationController
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     params[:show_statistics] = 'no' if params[:show_statistics].blank?
     count_filters
-    @unpaged_blocks = apply_scopes(Block.includes(:user, :readings))
+    @unpaged_blocks = apply_scopes(Block.includes(:readings))
     begin
-      @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page])
+      @pagy, @blocks = pagy(@unpaged_blocks.includes(:user), items: params[:per_page])
     rescue
-      @pagy, @blocks = pagy(@unpaged_blocks, items: params[:per_page], page: 1)
+      @pagy, @blocks = pagy(@unpaged_blocks.includes(:user), items: params[:per_page], page: 1)
     end
     respond_to do |format|
       format.html

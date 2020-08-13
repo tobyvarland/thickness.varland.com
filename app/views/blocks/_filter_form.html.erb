@@ -43,19 +43,19 @@
       </div>
       <div class="col">
         <h5 class="filter-title text-warning mb-2">Customer/Part</h5>
-        <%== filter_dropdown(f, :with_customer, "Customer", Block.distinct.pluck(:customer_code)) %>
-        <%== filter_dropdown(f, :with_process, "Process", Block.distinct.pluck(:process_code)) %>
-        <%== filter_dropdown(f, :with_part, "Part ID", Block.distinct.pluck(:part_number)) %>
-        <%== filter_dropdown(f, :with_sub, "Sub ID", Block.distinct.pluck(:part_sub)) %>
+        <%== filter_dropdown(f, :with_customer, "Customer", @unpaged_blocks.reorder(nil).distinct.pluck(:customer_code)) %>
+        <%== filter_dropdown(f, :with_process, "Process", @unpaged_blocks.reorder(nil).distinct.pluck(:process_code)) %>
+        <%== filter_dropdown(f, :with_part, "Part ID", @unpaged_blocks.reorder(nil).distinct.pluck(:part_number)) %>
+        <%== filter_dropdown(f, :with_sub, "Sub ID", @unpaged_blocks.reorder(nil).distinct.pluck(:part_sub)) %>
         <%== filter_text_field(f, :with_part_name, "Part Name") %>
       </div>
       <div class="col">
         <h5 class="filter-title text-warning mb-2">X-Ray</h5>
-        <%== filter_dropdown(f, :with_xray, "X-Ray", Block.distinct.pluck(:xray_id)) %>
-        <%== filter_dropdown(f, :with_application, "Application", Block.distinct.pluck(:application)) %>
-        <%== filter_dropdown(f, :with_directory, "Directory", Block.distinct.pluck(:directory)) %>
-        <%== filter_dropdown(f, :with_product, "Product", Block.distinct.pluck(:product)) %>
-        <%== filter_dropdown(f, :with_operator, "Operator", User.for_dropdown(Block.distinct.pluck(:user_id)), no_sort: true) %>
+        <%== filter_dropdown(f, :with_xray, "X-Ray", @unpaged_blocks.reorder(nil).distinct.pluck(:xray_id)) %>
+        <%== filter_dropdown(f, :with_application, "Application", @unpaged_blocks.reorder(nil).distinct.pluck(:application)) %>
+        <%== filter_dropdown(f, :with_directory, "Directory", @unpaged_blocks.reorder(nil).distinct.pluck(:directory)) %>
+        <%== filter_dropdown(f, :with_product, "Product", @unpaged_blocks.reorder(nil).distinct.pluck(:product)) %>
+        <%== filter_dropdown(f, :with_operator, "Operator", User.for_dropdown(@unpaged_blocks.reorder(nil).distinct.pluck(:user_id)), no_sort: true) %>
       </div>
       <div class="col">
         <h5 class="filter-title text-warning mb-2">Thickness</h5>
