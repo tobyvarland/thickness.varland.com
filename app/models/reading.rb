@@ -45,8 +45,13 @@ class Reading < ApplicationRecord
     fields << self.block.directory
     fields << self.block.product
     fields << self.block.number
-    fields << self.block.user.employee_number
-    fields << self.block.user.name
+    if self.block.user
+      fields << self.block.user.employee_number
+      fields << self.block.user.name
+    else
+      fields << ""
+      fields << ""
+    end
     fields << self.reading_at.strftime("%m/%d/%Y")
     fields << self.reading_at.strftime("%H:%M:%S")
     fields << self.thickness
