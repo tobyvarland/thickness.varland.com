@@ -191,8 +191,13 @@ class Block < ApplicationRecord
     fields << self.directory
     fields << self.product
     fields << self.number
-    fields << self.user.employee_number
-    fields << self.user.name
+    if self.user
+      fields << self.user.employee_number
+      fields << self.user.name
+    else
+      fields << ""
+      fields << ""
+    end
     fields << self.block_at.strftime("%m/%d/%Y")
     fields << self.block_at.strftime("%H:%M:%S")
     fields << self.mean_thickness
