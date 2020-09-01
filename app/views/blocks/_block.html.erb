@@ -1,4 +1,4 @@
-<tr data-block="<%= block.id %>">
+<tr class="<%= "table-info" if block.include_on_certification %>%" data-block="<%= block.id %>">
   <td>
     <span class="field-label">SO</span>
     <span class="value"><%= link_to block.shop_order, request.params.merge({with_shop_order: block.shop_order}) %></span>
