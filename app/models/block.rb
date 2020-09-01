@@ -129,8 +129,42 @@ class Block < ApplicationRecord
   }
 
   # Callbacks.
+  before_update :clear_certification_block_flags
+  after_update  :set_system_i_flag
 
   # Instance methods.
+
+  # Sets System i flag for certification thickness block.
+  def set_system_i_flag
+
+    # Exit unless changed flag.
+    return unless saved_change_to_include_on_certification?
+
+    # Update System i flag.
+    url =
+      if self.include_on_certification
+        "http://json400.varland.com/update_certification_thickness_data"
+      else
+        "http://json400.varland.com/clear_certification_thickness_data"
+      end
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.body = "shop_order=#{self.shop_order}"
+    http.request(request)
+
+  end
+
+  # Clears certification flags from other blocks for same shop order if setting this order.
+  def clear_certification_block_flags
+
+    # Exit if not setting flag.
+    return unless will_save_change_to_include_on_certification? && self.include_on_certification
+
+    # Clear attribute from all other blocks for this shop order.
+    Block.with_shop_order(self.shop_order).update_all(include_on_certification: false)
+
+  end
 
   # Returns part name fields as an array.
   def part_name

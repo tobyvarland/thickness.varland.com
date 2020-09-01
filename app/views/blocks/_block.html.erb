@@ -11,6 +11,20 @@
         <span class="part-name"><%= block.part_name.join("<br>").html_safe %></span>
       <% end %>
     <% end %>
+    <% if @thickness_user && @thickness_user.employee_number >= 400 %>
+      <hr>
+      <% if block.include_on_certification %>
+        <%= form_with(model: block, local: true) do |form| %>
+          <%= form.hidden_field :include_on_certification, value: false %>
+          <button class="btn-none text-danger" type="submit" onclick="return confirm('Are you sure you want to remove this block from the certification?');"><i class="fas fa-times"></i> Remove from Certification</button>
+        <% end %>
+      <% else %>
+        <%= form_with(model: block, local: true) do |form| %>
+          <%= form.hidden_field :include_on_certification, value: true %>
+          <button class="btn-none text-info" type="submit" onclick="return confirm('Are you sure this block meets all quality parameters and should be included on the certification?');"><i class="fas fa-flag-checkered"></i> Include on Certification</button>
+        <% end %>
+      <% end %>
+    <% end %>
   </td>
   <td class="text-center"><%= load_with_badges(block) %></td>
   <td>

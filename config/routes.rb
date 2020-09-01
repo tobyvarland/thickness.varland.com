@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get   "logout",               to: "sessions#destroy"
   post  "logout",               to: "sessions#destroy"
 
+  get   "api/certification_thickness/:shop_order",  to: "api#certification_thickness"
+
   resources :readings
   resources :blocks do
     collection do
@@ -15,5 +17,5 @@ Rails.application.routes.draw do
     end
   end
   resources :xrays
-  
+
 end

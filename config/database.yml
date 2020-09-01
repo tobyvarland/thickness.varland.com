@@ -5,6 +5,7 @@ thickness_default: &thickness_default
   username: thickness
   password: Vms.1946!
   host: mysql.varland.com
+  migrations_paths: db/migrate
 
 timeclock_default: &timeclock_default
   adapter: mysql2
@@ -13,6 +14,7 @@ timeclock_default: &timeclock_default
   username: rails_timeclock
   password: Vms.1946!
   host: mysql.varland.com
+  migrations_paths: db/timeclock_migrate
 
 development:
   thickness:
